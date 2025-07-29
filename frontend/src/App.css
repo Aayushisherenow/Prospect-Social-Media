@@ -1,0 +1,237 @@
+
+
+
+/* app.js */
+.app{
+    height: 100%;
+    width: auto;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* In your global CSS file (e.g., index.css or App.css) */
+.Toastify__toast-container {
+    z-index: 9999 !important;
+}
+
+/* posts.js */
+
+/* .card{
+    margin-top: 3%;
+    width: 85%;
+    height: 520px;
+    display: flex;
+    margin-left: 10%;
+    justify-content:left;
+    border: 3px solid black;
+    padding: 0px;
+        background-color: rgb(187, 209, 232);
+    /* border-radius: 2%; */
+
+*/
+.card-img{
+    width:100%;
+    height: 90%;
+    margin: 0px;
+    padding: 0px;    
+}
+.likecommentshare{
+    background-color: aliceblue;
+    width: 100%;
+    height: 100%;
+}
+.icons{
+    width: 18px;
+    height: 18px;
+
+}
+.imagepart{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.poststatus{
+    position: absolute;
+    width: 50%;
+    margin: 10px;
+    padding: auto;
+    padding-left: 40px;
+}
+
+
+/* faq */
+
+
+.faq {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin: auto;
+    height: auto;
+    align-items: center;
+    position: relative;
+    top: 20px;
+}
+
+.faq h2 {
+    border-bottom: 3px solid black;
+}
+
+.outerfaq {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    margin: 15px;
+    padding: 10px;
+    padding-left: 0px;
+    padding-right: 0px;
+    /* border: 1px solid black; */
+}
+
+.faq-items {
+    margin-bottom: 15px;
+    width: 100%;
+
+
+}
+
+.faq-items h5 {
+    margin: 0;
+    /* background-color: rgb(62, 216, 137); */
+            /* background: linear-gradient(to bottom right, #7E22CE, #3B82F6); */
+            /* background-color: #e5e7eb;; */
+            /* background: linear-gradient(to bottom right, #7E22CE, #3B82F6); */
+            background-color: #7a26c1;
+            color: #161617;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.faq-items p {
+    margin: 0;
+    height: 0px;
+    transition: 0.7s;
+    padding: 0px;
+    transform: scaleY(0);
+    color:rgb(23, 21, 21);
+
+}
+
+.showans {
+    display: block !important;
+    height: auto !important;
+    transform: scaleY(1) !important;
+    padding: 10px !important;
+}
+
+/* signinform */
+
+
+/* postpage */
+/* Global Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+.post-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.post-title {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: #6A0DAD;
+    /* Purple theme */
+}
+
+.post-image,
+.post-video {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.post-description {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.post-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.action-btn {
+    background-color: #6A0DAD;
+    /* Purple button */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.action-btn:hover {
+    background-color: #5b0c9b;
+}
+
+.comments-section {
+    margin-top: 30px;
+}
+
+.comment-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0 0 20px 0;
+}
+
+.comment-item {
+    background-color: #f4f4f9;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.comment-form {
+    display: flex;
+    gap: 10px;
+}
+
+.comment-input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.comment-submit-btn {
+    padding: 10px 20px;
+    background-color: #6A0DAD;
+    /* Purple button */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.comment-submit-btn:hover {
+    background-color: #5b0c9b;
+}
