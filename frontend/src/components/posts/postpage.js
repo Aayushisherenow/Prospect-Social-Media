@@ -35,6 +35,7 @@ const PostPage = () => {
       const res = await axiosInstance.put(`/posts/like/${postId}`);
       const updatedPost = res.data.data.post;
       const isLiked = res.data.data.isLiked;
+     
       setPost((prevPost) => ({
         ...prevPost,
         likesCount: updatedPost.likesCount,

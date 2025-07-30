@@ -3,12 +3,13 @@ import apiErrors from "../utils/ApiError.js";
 import { User } from "../models/user.model.js";
 import { Post } from "../models/post.model.js";
 import { Comment } from "../models/comment.model.js";
+import Sentiment from "sentiment";
+const sentiment = new Sentiment();
 
 // ======================= Create a Post =========================
 const createPost = asyncHandler(async (req, res) => {
   const { content, tags, location } = req.body;
   const multimedia = req.file;
-
 
   if (!content && !multimedia) {
     throw new apiErrors(
@@ -29,10 +30,23 @@ const createPost = asyncHandler(async (req, res) => {
 
   const filePath = req.file ? `/uploads/${req.file.originalname}` : null;
 
+  // Sentiment analysis
+  let sentimentLabel = null;
+  if (content) {
+    const analysis = sentiment.analyze(content);
+    sentimentLabel =
+      analysis.score > 0
+        ? "Positive": analysis.score < 0
+                    ? "Negative"
+        : "Neutral";
+  }
+  console.log("Sentiment Analysis Result:", sentimentLabel);
+
   const postData = {
     author: req.user._id,
     content,
     tags,
+    sentiment: sentimentLabel,
     location,
   };
 
@@ -178,7 +192,7 @@ const deletePost = asyncHandler(async (req, res) => {
   ) {
     throw new apiErrors(403, "You can only delete your own post");
   }
-  
+
   await Comment.deleteMany({ _id: { $in: post.comments } }); // Optional: Delete all related comments
   await post.deleteOne();
 
@@ -236,7 +250,7 @@ const updatePost = asyncHandler(async (req, res, next) => {
     const { id } = req.params;
     const { content } = req.body;
     const newMultimedia = req.file; // New multimedia file if provided
-   
+
     const post = await Post.findById(id);
     if (!post) {
       throw new apiErrors("Post not found", 404);
@@ -256,7 +270,6 @@ const updatePost = asyncHandler(async (req, res, next) => {
 
     await post.save();
 
-    
     return res.status(200).json({
       status: 200,
       data: post,
@@ -272,13 +285,13 @@ const getPostsByUser = asyncHandler(async (req, res, next) => {
     const userId = req.params.userId;
 
     const posts = await Post.find({ author: userId })
-      .populate("author", "username coverImage") 
+      .populate("author", "username coverImage")
       .populate({
         path: "comments",
-        populate: { path: "user", select: "username" }, 
+        populate: { path: "user", select: "username" },
       })
-      .populate("likes", "username") 
-      .sort({ createdAt: -1 }); 
+      .populate("likes", "username")
+      .sort({ createdAt: -1 });
 
     res.status(200).json({
       status: 200,
@@ -289,7 +302,6 @@ const getPostsByUser = asyncHandler(async (req, res, next) => {
     next(err);
   }
 });
-
 
 //=========================report post=========================
 const reportPost = asyncHandler(async (req, res) => {
@@ -324,7 +336,6 @@ const reportPost = asyncHandler(async (req, res) => {
     },
   });
 });
-
 
 // ======================= Get For You Posts =========================
 const getfypPosts = asyncHandler(async (req, res) => {
@@ -379,8 +390,6 @@ const getfypPosts = asyncHandler(async (req, res) => {
   });
 });
 
-
-
 export {
   createPost,
   deletePost,
@@ -392,5 +401,5 @@ export {
   getPostById,
   getPostsByUser,
   getfypPosts,
-  reportPost
+  reportPost,
 };

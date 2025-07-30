@@ -19,6 +19,8 @@ const AllPostsPage = () => {
   const [commentText, setCommentText] = useState("");
   const [commentStatus, setCommentStatus] = useState({});
   const [actionMenuPostId, setActionMenuPostId] = useState(null);
+  // const [sentimentStatus, setSentimentStatus] = useState("Neutral");
+
 
   useEffect(() => {
     const fetchAllPosts = async () => {
@@ -31,6 +33,9 @@ const AllPostsPage = () => {
     };
     fetchAllPosts();
   }, []);
+
+
+   
 
   const toggleCommentInput = (postId) => {
     setActiveCommentPostId((prevId) => (prevId === postId ? null : postId));
@@ -142,6 +147,12 @@ const AllPostsPage = () => {
               key={post._id}
               className="post-item mb-8 border-b-4 pb-6 relative"
             >
+              {/* sentiment status */}
+                <div className="text-sm text-gray-500">
+                  <p>Sentiment: {post.sentiment || "Neutral"}</p>
+              </div>
+              
+              
               {/* Top section with author and 3-dots */}
               <div className="flex justify-between items-center px-2">
                 <div className="flex gap-4 py-2 items-center">
@@ -154,7 +165,6 @@ const AllPostsPage = () => {
                     {post.author?.username || "Unknown User"}
                   </h2>
                 </div>
-
                 {/* 3 Dots icon */}
                 <div
                   className="relative group p-4 rounded"
@@ -167,6 +177,8 @@ const AllPostsPage = () => {
                     />
                   </button>
                 </div>
+
+
 
                 {/* Dropdown Menu */}
                 {actionMenuPostId === post._id && (
